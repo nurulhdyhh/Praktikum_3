@@ -1,0 +1,56 @@
+import 'package:flutter/material.dart';
+
+class LayarKedua extends StatelessWidget {
+  const LayarKedua({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          title: const Text('Screen 2'),
+        ),
+        body: Center(
+            child: ElevatedButton(
+          child: const Text("Ini screen kedua, tap icon back di app bar"),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        )));
+  }
+}
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const MaterialApp(title: 'Test Route', home: MyHome());
+  }
+}
+
+//perlu  dipisah karena Navigator perlu punya parent Material App
+class MyHome extends StatelessWidget {
+  const MyHome({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Test Route'),
+      ),
+      body: Center(
+        child: ElevatedButton(
+            child: const Text('Ke screen Kedua'),
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+                return const LayarKedua();
+              }));
+            }),
+      ),
+    );
+  }
+}
